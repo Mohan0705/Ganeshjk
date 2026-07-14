@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+      <header className="sticky top-0 z-40 w-full glass-effect-strong border-b border-white/20 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -33,29 +33,29 @@ export const Navbar: React.FC = () => {
               onClick={() => handleNavClick('home')}
               id="nav-logo"
             >
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-primary to-[#FF8C39] flex items-center justify-center shadow-md shadow-primary/15 group-hover:scale-105 transition-transform duration-300">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary via-secondary to-[#FF8C39] flex items-center justify-center shadow-lg shadow-primary/25 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
                 <UtensilsCrossed className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="font-display font-bold text-xl tracking-tight text-gray-800 block">
-                  J K <span className="text-primary">Restaurant</span>
+                <span className="font-display font-bold text-xl sm:text-2xl tracking-tight text-gray-800 block">
+                  Ganesh J K <span className="text-primary text-glow">Restaurant</span>
                 </span>
-                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest -mt-1 block">
-                  Fresh & Delicious
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest -mt-1 block font-semibold">
+                  Luxury Dining & Fine Taste
                 </span>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-1" id="desktop-nav">
+            <nav className="hidden md:flex items-center space-x-1 bg-white/40 p-1.5 rounded-full border border-white/50 shadow-xs" id="desktop-nav">
               {navLinks.map((link) => {
                 const isActive = activePage === link.id;
                 return (
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                      isActive ? 'text-primary bg-orange-50/50' : 'text-gray-500 hover:text-primary hover:bg-orange-50/30'
+                    className={`relative px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                      isActive ? 'text-primary bg-white shadow-xs font-bold' : 'text-gray-600 hover:text-primary hover:bg-white/40'
                     }`}
                     id={`nav-link-${link.id}`}
                   >
@@ -63,7 +63,7 @@ export const Navbar: React.FC = () => {
                     {isActive && (
                       <motion.div
                         layoutId="activeTabIndicator"
-                        className="absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full"
+                        className="absolute bottom-1 left-5 right-5 h-0.5 bg-primary rounded-full"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -77,19 +77,19 @@ export const Navbar: React.FC = () => {
               {/* Cart Button */}
               <button
                 onClick={() => setCartOpen(true)}
-                className="relative p-2.5 rounded-xl bg-orange-50 hover:bg-orange-100/75 border border-orange-100/50 text-primary transition-all duration-300 group shadow-sm flex items-center space-x-1.5"
+                className="relative px-4 py-2.5 rounded-full bg-primary text-white hover:bg-primary-hover transition-all duration-300 group shadow-md shadow-primary/20 hover-glow cursor-pointer font-bold text-sm flex items-center space-x-2"
                 id="navbar-cart-btn"
                 aria-label="Open Shopping Cart"
               >
-                <ShoppingBag className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 text-primary" />
-                <span className="text-xs font-bold text-primary hidden sm:inline">Cart</span>
+                <ShoppingBag className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300 text-white" />
+                <span className="text-xs font-bold hidden sm:inline">Cart</span>
                 <AnimatePresence>
                   {cartCount > 0 && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 bg-red-500 text-white font-bold text-[10px] rounded-full flex items-center justify-center border border-white shadow-md"
+                      className="min-w-[20px] h-5 px-1.5 bg-white text-primary font-bold text-[10px] rounded-full flex items-center justify-center shadow-md animate-pulse"
                     >
                       {cartCount}
                     </motion.span>
@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 md:hidden transition-all duration-300"
+                className="p-2.5 rounded-full bg-white hover:bg-gray-100 border border-gray-250/50 text-gray-700 md:hidden transition-all duration-300 shadow-xs cursor-pointer"
                 id="navbar-mobile-toggle"
                 aria-label="Toggle Navigation Menu"
               >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChefHat, ShieldCheck, Zap, HeartHandshake, PhoneCall } from 'lucide-react';
+import { ChefHat, ShieldCheck, Zap, HeartHandshake, PhoneCall, ArrowRight, Award } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const WhyChooseUs: React.FC = () => {
@@ -7,63 +7,69 @@ export const WhyChooseUs: React.FC = () => {
     {
       icon: <ChefHat className="w-6 h-6 text-primary" />,
       title: 'Master Culinary Artists',
-      description: 'Our traditional kitchen is led by award-winning chefs with decades of experience crafting premium Indian, Tandoori & Chinese recipes.'
+      description: 'Our elite kitchen is directed by legendary, award-winning chefs with decades of experience preparing legacy Royal Indian, Tandoori & Mughlai recipes.'
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-primary" />,
-      title: 'Flawless Food Hygiene',
-      description: 'We follow stringent quality checks, triple-washing processes, and complete kitchen sanitization daily to guarantee safe, healthy meals.'
+      title: 'Michelin-Grade Hygiene',
+      description: 'We adhere strictly to flawless quality metrics: multi-stage ingredient sanitization, pure filtered water prep, and immaculate kitchen environments.'
     },
     {
       icon: <Zap className="w-6 h-6 text-primary" />,
-      title: 'Superfast Insulated Delivery',
-      description: 'Every local delivery order is packed in custom thermo-insulated containers and delivered within 25 minutes to retain piping hot freshness.'
+      title: 'Thermal Insulated Express',
+      description: 'Every online delivery is packaged carefully in thermo-secure custom boxes and dispatched with priority routes to lock in piping hot steam.'
     },
     {
       icon: <HeartHandshake className="w-6 h-6 text-primary" />,
-      title: 'No Hidden Ingredients',
-      description: 'We prioritize health: No artificial MSG enhancers, no chemical food colorings, and 100% premium quality ground cold-pressed oils.'
+      title: '100% Purity Guaranteed',
+      description: 'Zero added artificial MSG, zero synthetic food color dyes, and prepared exclusively with cold-pressed oils for exquisite, wholesome taste.'
     }
   ];
 
   return (
-    <section className="py-20 relative bg-[#FAFAFA]" id="why-choose-us">
-      <div className="absolute top-0 right-1/4 w-80 h-80 bg-orange-100/20 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-24 bg-white relative overflow-hidden" id="why-choose-us">
+      {/* Exquisite Subtle Background Ornaments */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-primary text-xs font-bold tracking-widest uppercase">Our Commitment</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-gray-800 tracking-tight mt-2">
-            Why Dine at J K Restaurant?
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <span className="text-primary text-xs font-extrabold tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full inline-block">
+            ✨ Uncompromising Excellence
+          </span>
+          <h2 className="font-display font-bold text-4xl sm:text-5xl text-gray-900 tracking-tight mt-4">
+            The Ganesh J K Benchmark
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-primary to-[#FF8C39] mx-auto mt-4 rounded-full" />
-          <p className="text-gray-500 font-light text-sm mt-4">
-            We don't just cook food; we craft culinary experiences. Discover how we set the highest benchmark for fine dining and contactless home delivery.
+          <div className="w-24 h-1 bg-gradient-to-r from-primary via-secondary to-gold mx-auto mt-4 rounded-full" />
+          <p className="text-gray-600 font-light text-sm mt-4 leading-relaxed">
+            We do not just prepare food; we cultivate deep sensory memories. Discover how we elevate every meal into a royal banquet of taste, hygiene, and service.
           </p>
         </div>
 
         {/* Highlights Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {highlights.map((item, idx) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl bg-white border border-gray-200/80 flex flex-col items-center text-center space-y-4 shadow-xs hover:shadow-md transition-all duration-300"
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="p-8 rounded-3xl bg-[#FFFDFB]/80 border border-[#F4EBE1] flex flex-col items-center text-center space-y-5 hover:bg-white shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative group"
             >
-              {/* Icon Container */}
-              <div className="w-14 h-14 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center shadow-xs">
+              {/* Gold light shine on group hover */}
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
+
+              {/* Icon Container with Floating Accent */}
+              <div className="w-16 h-16 rounded-2xl bg-orange-50 border border-orange-100/60 flex items-center justify-center shadow-inner relative z-10 group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
 
               {/* Title & Description */}
-              <div className="space-y-2">
-                <h3 className="font-display font-bold text-lg text-gray-850 tracking-tight">
+              <div className="space-y-3 relative z-10">
+                <h3 className="font-display font-bold text-lg text-gray-900 tracking-tight">
                   {item.title}
                 </h3>
                 <p className="text-xs text-gray-500 leading-relaxed font-light">
@@ -74,18 +80,29 @@ export const WhyChooseUs: React.FC = () => {
           ))}
         </div>
 
-        {/* Culinary Quote Banner */}
-        <div className="mt-16 p-8 rounded-2xl bg-orange-50/50 border border-orange-100/50 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <h4 className="text-base font-bold text-gray-800 tracking-tight">Planning a family gathering or mini-party?</h4>
-            <p className="text-xs text-gray-500 mt-1 font-light">We accept custom catering orders, pre-orders, and heavy-portion family packs!</p>
+        {/* Catering Banner with High-End Glass styling */}
+        <div className="mt-20 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#1C1C1C] via-[#2A2A2A] to-[#121212] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
+          {/* Subtle flare behind */}
+          <div className="absolute top-0 right-0 w-80 h-full bg-primary/10 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="text-center md:text-left relative z-10 space-y-1.5">
+            <span className="text-[10px] uppercase font-extrabold tracking-widest text-primary flex items-center justify-center md:justify-start gap-1">
+              <Award className="w-3.5 h-3.5" />
+              <span>Royal Banquet &amp; Party Catering</span>
+            </span>
+            <h4 className="text-xl sm:text-2xl font-display font-semibold text-white tracking-tight">
+              Planning a Grand Gathering or Private Party?
+            </h4>
+            <p className="text-xs text-gray-400 font-light">
+              We specialize in custom bulk orders, elegant menu curated party trays, and full catering service for your memorable milestones.
+            </p>
           </div>
           <a
             href="tel:+919160776152"
-            className="px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm transition-all duration-300 flex items-center space-x-2 shadow-md shadow-primary/10 cursor-pointer"
+            className="px-8 py-4 rounded-full bg-primary hover:bg-primary-hover text-white font-extrabold text-xs uppercase tracking-widest transition-all duration-300 flex items-center space-x-2.5 shadow-lg shadow-primary/25 hover:scale-105 hover-glow cursor-pointer whitespace-nowrap z-10"
           >
             <PhoneCall className="w-4 h-4" />
-            <span>Call Our Manager</span>
+            <span>Connect with our Manager</span>
           </a>
         </div>
 
@@ -93,3 +110,4 @@ export const WhyChooseUs: React.FC = () => {
     </section>
   );
 };
+
