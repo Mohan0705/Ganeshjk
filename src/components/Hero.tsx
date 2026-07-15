@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { PremiumImage } from './PremiumImage';
 
 export const Hero: React.FC = () => {
-  const { setActivePage, setSearchQuery, setSelectedMenuCategory } = useApp();
+  const { setActivePage, setSearchQuery, setSelectedMenuCategory, t, language } = useApp();
   const [localSearch, setLocalSearch] = useState('');
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -62,10 +62,10 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-effect-dark border border-white/10 text-secondary text-xs font-bold tracking-wider uppercase shadow-lg shadow-black/10"
+              className="mt-12 sm:mt-14 lg:mt-8 inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-effect-dark border border-white/10 text-secondary text-xs font-bold tracking-wider uppercase shadow-lg shadow-black/10"
             >
               <Flame className="w-4.5 h-4.5 text-primary animate-pulse" />
-              <span>Dine In • Takeaway • WhatsApp Delivery</span>
+              <span>{t('nav.tagline')}</span>
             </motion.div>
 
             {/* Elegant Luxury Heading */}
@@ -76,9 +76,9 @@ export const Hero: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="font-display font-medium text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]"
               >
-                Welcome to <br />
+                {t('hero.welcome')} <br />
                 <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-[#FFC573] text-glow filter drop-shadow-md">
-                  Ganesh J K Restaurant
+                   Ganesh JK Restaurant
                 </span>
               </motion.h1>
               
@@ -88,7 +88,7 @@ export const Hero: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-gray-300 text-sm sm:text-lg max-w-2xl font-light leading-relaxed font-sans"
               >
-                Where Quality Meets Great Taste. Freshly prepared Biryanis, Chinese starters, authentic Seafood and rich North Indian delicacies served with supreme love.
+                {t('hero.desc')}
               </motion.p>
             </div>
 
@@ -98,20 +98,20 @@ export const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               onSubmit={handleSearchSubmit}
-              className="max-w-xl flex items-center p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-xl shadow-black/20 w-full"
+              className="max-w-xl flex items-center p-1.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-xl shadow-black/20 w-full"
             >
               <input
                 type="text"
-                placeholder="Search Biryani, Tandoori Chicken, Seafood..."
+                placeholder={t('hero.searchPlaceholder')}
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                className="flex-1 bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:outline-none text-sm font-medium"
+                className="flex-1 min-w-0 bg-transparent px-3 sm:px-4 py-3 text-white placeholder-gray-400 focus:outline-none text-sm font-medium"
               />
               <button
                 type="submit"
-                className="px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm transition-all duration-300 flex items-center space-x-2 shadow-lg shadow-primary/35 hover-glow cursor-pointer"
+                className="px-4 sm:px-6 py-2.5 sm:py-3.5 shrink-0 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm transition-all duration-300 flex items-center space-x-1.5 sm:space-x-2 shadow-lg shadow-primary/35 hover-glow cursor-pointer"
               >
-                <span>Search</span>
+                <span>{t('hero.search')}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </motion.form>
@@ -121,18 +121,23 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap gap-2 justify-start text-xs text-gray-400 font-medium"
+              className="flex flex-nowrap items-center text-xs text-gray-400 font-medium overflow-x-auto scrollbar-none pb-1 w-full"
             >
-              <span className="py-1 text-gray-500 mr-2">Featured:</span>
-              {['Biryani', 'Starters', 'Chinese', 'Seafood'].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => handleQuickCategory(cat)}
-                  className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-primary/50 hover:bg-primary/20 transition-all duration-300 cursor-pointer shadow-xs font-semibold"
-                >
-                  {cat}
-                </button>
-              ))}
+              <span className="py-1 text-gray-500 mr-2 shrink-0">{t('hero.featured')}</span>
+              <div className="flex items-center gap-2 flex-nowrap">
+                {['Biryani', 'Starters', 'Seafood'].map((cat) => {
+                  const displayLabel = cat === 'Biryani' ? t('cat.biryani') : cat === 'Starters' ? t('cat.starters') : t('cat.seafood');
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => handleQuickCategory(cat)}
+                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-primary/50 hover:bg-primary/20 transition-all duration-300 cursor-pointer shadow-xs font-semibold shrink-0"
+                    >
+                      {displayLabel}
+                    </button>
+                  );
+                })}
+              </div>
             </motion.div>
 
             {/* Luxury Action Buttons */}
@@ -146,16 +151,8 @@ export const Hero: React.FC = () => {
                 onClick={() => setActivePage('menu')}
                 className="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-1 hover-glow flex items-center space-x-2.5 cursor-pointer"
               >
-                <span>Explore Menu</span>
+                <span>{t('hero.exploreMenu')}</span>
                 <Sparkles className="w-5 h-5 text-white" />
-              </button>
-              
-              <button
-                onClick={openWhatsApp}
-                className="px-6 py-4 rounded-xl bg-[#2E8B57]/10 hover:bg-[#2E8B57]/20 border border-[#2E8B57]/30 text-white font-bold text-base shadow-lg transition-all duration-300 hover:-translate-y-1 flex items-center space-x-2 cursor-pointer"
-              >
-                <MessageSquare className="w-5 h-5 text-[#2E8B57]" />
-                <span>Order on WhatsApp</span>
               </button>
               
               <button
@@ -163,7 +160,7 @@ export const Hero: React.FC = () => {
                 className="px-6 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-base shadow-lg transition-all duration-300 hover:-translate-y-1 flex items-center space-x-2 cursor-pointer"
               >
                 <Calendar className="w-5 h-5 text-secondary" />
-                <span>Book Table</span>
+                <span>{t('hero.bookTable')}</span>
               </button>
             </motion.div>
 
@@ -197,38 +194,6 @@ export const Hero: React.FC = () => {
                 <h3 className="text-white font-display font-bold text-lg mt-1.5 drop-shadow-md">Signature Hyderabadi Biryani</h3>
               </div>
             </motion.div>
-
-            {/* Floating Bento Card 1: Best Seller Tag */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -top-4 right-4 glass-card-dark p-4 rounded-2xl flex items-center space-x-3.5 shadow-xl max-w-[210px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-primary font-bold text-lg">
-                🍗
-              </div>
-              <div>
-                <h4 className="text-white text-xs font-bold">Crispy Tandoori</h4>
-                <p className="text-[10px] text-gray-400">Smoked over wood coals</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Bento Card 2: Ratings */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute bottom-4 -left-4 glass-card p-4 rounded-2xl flex items-center space-x-3.5 shadow-2xl max-w-[210px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-primary font-bold text-lg">
-                ⭐️
-              </div>
-              <div>
-                <h4 className="text-gray-800 text-xs font-bold">4.9 Star Rating</h4>
-                <p className="text-[10px] text-gray-500">Tadepalligudem&#39;s Finest</p>
-              </div>
-            </motion.div>
           </div>
 
         </div>
@@ -244,19 +209,19 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent rounded-3xl pointer-events-none" />
           
           <div className="text-center p-3">
-            <h3 className="text-white font-display text-2xl sm:text-3xl font-extrabold text-glow">4.9 ★</h3>
+            <h3 className="text-white font-sans text-2xl sm:text-3xl font-extrabold text-glow">4.9 ★</h3>
             <p className="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wider">Top Rated Dine</p>
           </div>
           <div className="text-center p-3 border-l border-white/10">
-            <h3 className="text-white font-display text-2xl sm:text-3xl font-extrabold text-glow">25-30</h3>
+            <h3 className="text-white font-sans text-2xl sm:text-3xl font-extrabold text-glow">25-30</h3>
             <p className="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wider">Minutes Delivery</p>
           </div>
           <div className="text-center p-3 border-l border-white/10">
-            <h3 className="text-white font-display text-2xl sm:text-3xl font-extrabold text-glow">100%</h3>
+            <h3 className="text-white font-sans text-2xl sm:text-3xl font-extrabold text-glow">100%</h3>
             <p className="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wider">Fresh Ingredients</p>
           </div>
           <div className="text-center p-3 border-l border-white/10">
-            <h3 className="text-white font-display text-2xl sm:text-3xl font-extrabold text-glow">10k+</h3>
+            <h3 className="text-white font-sans text-2xl sm:text-3xl font-extrabold text-glow">10k+</h3>
             <p className="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wider">Happy Foodies</p>
           </div>
         </motion.div>

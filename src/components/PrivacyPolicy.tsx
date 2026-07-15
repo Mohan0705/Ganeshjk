@@ -36,7 +36,7 @@ export const PrivacyPolicy: React.FC = () => {
 
           <div className="space-y-6 text-gray-600 leading-relaxed font-light">
             <p className="text-base font-normal text-gray-750">
-              Welcome to the Ganesh J K Restaurant website. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your details when you place an order or interact with our digital sanctuary.
+              Welcome to the Ganesh JK Restaurant website. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your details when you place an order or interact with our digital sanctuary.
             </p>
 
             <div className="space-y-2">

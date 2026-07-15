@@ -5,7 +5,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 'b1',
     name: 'Special Chicken Biryani',
-    description: 'Fragrant basmati rice cooked with marinated chicken, premium saffron, and authentic J K special spices in traditional dum style.',
+    description: 'Fragrant basmati rice cooked with marinated chicken, premium saffron, and authentic JK special spices in traditional dum style.',
     price: 290,
     rating: 4.8,
     category: 'Biryani',
@@ -59,7 +59,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 'fr1',
     name: 'Special Chicken Fried Rice',
-    description: 'Wok-tossed premium rice with tender seasoned chicken, eggs, crunchy veggies, and signature J K sauces.',
+    description: 'Wok-tossed premium rice with tender seasoned chicken, eggs, crunchy veggies, and signature JK sauces.',
     price: 260,
     rating: 4.7,
     category: 'Fried Rice',
@@ -80,7 +80,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 'fr3',
     name: 'Veg Fried Rice',
-    description: 'Authentic Chinese-style stir-fried rice loaded with crunchy carrots, peas, beans, and fresh spring onions.',
+    description: 'Authentic stir-fried rice loaded with crunchy carrots, peas, beans, and fresh spring onions.',
     price: 190,
     rating: 4.3,
     category: 'Fried Rice',
@@ -133,7 +133,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 's3',
     name: 'Dragon Chicken',
-    description: 'Sweet and spicy Indo-Chinese chicken chunks wok-tossed with cashews, bell peppers, and signature hot chili paste.',
+    description: 'Sweet and spicy chicken chunks wok-tossed with cashews, bell peppers, and signature hot chili paste.',
     price: 270,
     rating: 4.8,
     category: 'Starters',
@@ -349,7 +349,7 @@ export const REVIEWS: Review[] = [
     id: 'r1',
     name: 'Aravind Swamy',
     rating: 5,
-    comment: 'The Special Chicken Biryani here is unparalleled! Absolute perfection in terms of spice balance, aromatic rice, and succulent chicken. Highly recommend J K Restaurant!',
+    comment: 'The Special Chicken Biryani here is unparalleled! Absolute perfection in terms of spice balance, aromatic rice, and succulent chicken. Highly recommend JK Restaurant!',
     date: '3 days ago'
   },
   {
@@ -363,7 +363,7 @@ export const REVIEWS: Review[] = [
     id: 'r3',
     name: 'Karthik Rao',
     rating: 5,
-    comment: 'Amazing Apollo Fish! Super crispy, spiced just right. The design of the web app is top-notch too, matches the premium dine-in experience of J K.',
+    comment: 'Amazing Apollo Fish! Super crispy, spiced just right. The design of the web app is top-notch too, matches the premium dine-in experience of JK.',
     date: '2 weeks ago'
   },
   {

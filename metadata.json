@@ -1,6 +1,6 @@
 {
-  "name": "J K Restaurant",
-  "description": "Premium glassmorphism website for J K Restaurant featuring online menu, shopping cart, and seamless WhatsApp order placing.",
+  "name": "JK Restaurant",
+  "description": "Premium glassmorphism website for JK Restaurant featuring online menu, shopping cart, and seamless WhatsApp order placing.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -36,7 +36,7 @@ export const TermsSection: React.FC = () => {
 
           <div className="space-y-6 text-gray-600 leading-relaxed font-light">
             <p className="text-base font-normal text-gray-750">
-              By accessing, browsing, or ordering from the Ganesh J K Restaurant digital platform, you explicitly agree to comply with and be bound by the following terms and conditions. Please read carefully.
+              By accessing, browsing, or ordering from the Ganesh JK Restaurant digital platform, you explicitly agree to comply with and be bound by the following terms and conditions. Please read carefully.
             </p>
 
             <div className="space-y-2">
@@ -52,10 +52,10 @@ export const TermsSection: React.FC = () => {
             <div className="space-y-2">
               <h3 className="font-display font-bold text-gray-900 text-lg flex items-center gap-2">
                 <span className="text-xs font-mono text-primary bg-primary/10 w-6 h-6 rounded-full flex items-center justify-center">2</span>
-                <span>Pricing &amp; Taxes</span>
+                <span>Pricing &amp; Delivery</span>
               </h3>
               <p className="pl-8">
-                While we strive to keep all prices updated, Ganesh J K Restaurant reserves the right to modify any dish pricing without prior notification. A standard GST of 5% is added to all bills in compliance with local municipal food codes. Delivery charges are flat ₹40 and are fully waived on orders summing above ₹500.
+                While we strive to keep all prices updated, Ganesh JK Restaurant reserves the right to modify any dish pricing without prior notification. Delivery charges are flat ₹40 and are fully waived on orders summing above ₹500.
               </p>
             </div>
 
@@ -85,7 +85,7 @@ export const TermsSection: React.FC = () => {
                 <span>Intellectual Property</span>
               </h3>
               <p className="pl-8">
-                All photographic displays, proprietary recipe names (e.g., Chicken 555), and custom web layouts remain the intellectual property of Ganesh J K Restaurant. Unauthorized reproduction of content is strictly prohibited.
+                All photographic displays, proprietary recipe names (e.g., Chicken 555), and custom web layouts remain the intellectual property of Ganesh JK Restaurant. Unauthorized reproduction of content is strictly prohibited.
               </p>
             </div>
           </div>

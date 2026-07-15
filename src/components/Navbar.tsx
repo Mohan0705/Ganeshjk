@@ -4,17 +4,17 @@ import { ShoppingBag, Menu, X, UtensilsCrossed } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export const Navbar: React.FC = () => {
-  const { activePage, setActivePage, cart, setCartOpen } = useApp();
+  const { activePage, setActivePage, cart, setCartOpen, language, setLanguage, t } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const navLinks = [
-    { name: 'Home', id: 'home' },
-    { name: 'Menu', id: 'menu' },
-    { name: 'About', id: 'about' },
-    { name: 'Gallery', id: 'gallery' },
-    { name: 'Contact', id: 'contact' },
+    { name: t('nav.home'), id: 'home' },
+    { name: t('nav.menu'), id: 'menu' },
+    { name: t('nav.about'), id: 'about' },
+    { name: t('nav.gallery'), id: 'gallery' },
+    { name: t('nav.contact'), id: 'contact' },
   ];
 
   const handleNavClick = (pageId: string) => {
@@ -36,12 +36,9 @@ export const Navbar: React.FC = () => {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary via-secondary to-[#FF8C39] flex items-center justify-center shadow-lg shadow-primary/25 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
                 <UtensilsCrossed className="w-6 h-6 text-white" />
               </div>
-              <div>
-                <span className="font-display font-bold text-xl sm:text-2xl tracking-tight text-gray-800 block">
-                  Ganesh J K <span className="text-primary text-glow">Restaurant</span>
-                </span>
-                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest -mt-1 block font-semibold">
-                  Luxury Dining & Fine Taste
+              <div className="flex flex-col justify-center">
+                <span className="font-display font-bold text-lg sm:text-2xl tracking-tight text-gray-800 block leading-tight">
+                  Ganesh JK <span className="text-primary text-glow">Restaurant</span>
                 </span>
               </div>
             </div>
@@ -73,7 +70,33 @@ export const Navbar: React.FC = () => {
             </nav>
 
             {/* Right Side Controls */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3.5">
+              {/* Desktop Language Switcher */}
+              <div className="hidden sm:flex items-center bg-gray-100/80 hover:bg-gray-100 p-1 rounded-full border border-gray-250/30 transition-all duration-300">
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
+                    language === 'en'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-gray-600 hover:text-primary'
+                  }`}
+                  aria-label="English Language"
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLanguage('te')}
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
+                    language === 'te'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-gray-600 hover:text-primary'
+                  }`}
+                  aria-label="Telugu Language"
+                >
+                  తెలుగు
+                </button>
+              </div>
+
               {/* Cart Button */}
               <button
                 onClick={() => setCartOpen(true)}
@@ -82,7 +105,7 @@ export const Navbar: React.FC = () => {
                 aria-label="Open Shopping Cart"
               >
                 <ShoppingBag className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300 text-white" />
-                <span className="text-xs font-bold hidden sm:inline">Cart</span>
+                <span className="text-xs font-bold hidden md:inline">{t('nav.cart')}</span>
                 <AnimatePresence>
                   {cartCount > 0 && (
                     <motion.span
@@ -134,7 +157,7 @@ export const Navbar: React.FC = () => {
             >
               <div className="flex items-center justify-between mb-8">
                 <span className="font-display font-bold text-lg text-gray-800">
-                  Navigation
+                  {t('nav.navigation')}
                 </span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
@@ -144,7 +167,7 @@ export const Navbar: React.FC = () => {
                 </button>
               </div>
 
-              <div className="flex flex-col space-y-3 flex-1">
+              <div className="flex flex-col space-y-3 flex-1 overflow-y-auto mb-4 scrollbar-none">
                 {navLinks.map((link) => {
                   const isActive = activePage === link.id;
                   return (
@@ -162,6 +185,35 @@ export const Navbar: React.FC = () => {
                     </button>
                   );
                 })}
+
+                {/* Mobile Language Switcher Section */}
+                <div className="border-t border-gray-100 pt-6 mt-4">
+                  <span className="text-xs font-bold text-gray-400 block mb-3 uppercase tracking-wider">
+                    Language / భాష
+                  </span>
+                  <div className="grid grid-cols-2 gap-2 bg-gray-50 p-1.5 rounded-2xl border border-gray-200/60">
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`py-2.5 rounded-xl text-xs font-extrabold transition-all duration-200 cursor-pointer ${
+                        language === 'en'
+                          ? 'bg-primary text-white shadow-sm'
+                          : 'text-gray-600 hover:bg-white/50'
+                      }`}
+                    >
+                      English
+                    </button>
+                    <button
+                      onClick={() => setLanguage('te')}
+                      className={`py-2.5 rounded-xl text-xs font-extrabold transition-all duration-200 cursor-pointer ${
+                        language === 'te'
+                          ? 'bg-primary text-white shadow-sm'
+                          : 'text-gray-600 hover:bg-white/50'
+                      }`}
+                    >
+                      తెలుగు
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-auto border-t border-gray-100 pt-6">
@@ -170,8 +222,8 @@ export const Navbar: React.FC = () => {
                     <UtensilsCrossed className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-gray-800">J K Restaurant</h4>
-                    <p className="text-xs text-gray-450">Dine In • Delivery • Takeaway</p>
+                    <h4 className="text-sm font-bold text-gray-800">Ganesh JK</h4>
+                    <p className="text-xs text-gray-450">{t('nav.tagline')}</p>
                   </div>
                 </div>
                 <button 
@@ -182,7 +234,7 @@ export const Navbar: React.FC = () => {
                   className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm text-center flex items-center justify-center space-x-2 transition-all duration-300 shadow-md shadow-primary/20"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  <span>View Cart ({cartCount})</span>
+                  <span>{t('nav.viewCart')} ({cartCount})</span>
                 </button>
               </div>
             </motion.div>

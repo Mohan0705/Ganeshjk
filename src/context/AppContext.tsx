@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { MenuItem, CartItem } from '../types';
 import { useCartStore } from '../store/useCartStore';
+import { Language, TRANSLATIONS } from './translations';
 
 interface AppContextType {
   activePage: string;
@@ -17,6 +18,9 @@ interface AppContextType {
   selectedMenuCategory: string;
   setSelectedMenuCategory: (category: string) => void;
   deliveryCharge: number;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string, replacements?: Record<string, string | number>) => string;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -25,6 +29,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activePage, setActivePageInternal] = useState<string>('home');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedMenuCategory, setSelectedMenuCategory] = useState<string>('All');
+  const [language, setLanguageState] = useState<Language>(() => {
+    try {
+      const saved = localStorage.getItem('app_language');
+      return (saved === 'te' || saved === 'en') ? saved : 'en';
+    } catch {
+      return 'en';
+    }
+  });
   
   const deliveryCharge = 40; // Flat ₹40 delivery fee
 
@@ -43,6 +55,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem('app_language', lang);
+    } catch (e) {
+      console.warn('Failed to save language setting:', e);
+    }
+  };
+
+  const t = (key: string, replacements?: Record<string, string | number>): string => {
+    const translationSet = TRANSLATIONS[language] || TRANSLATIONS['en'];
+    let text = translationSet[key] || TRANSLATIONS['en'][key] || key;
+    if (replacements) {
+      Object.entries(replacements).forEach(([k, v]) => {
+        text = text.replace(`{${k}}`, String(v));
+      });
+    }
+    return text;
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -59,7 +91,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSearchQuery,
         selectedMenuCategory,
         setSelectedMenuCategory,
-        deliveryCharge
+        deliveryCharge,
+        language,
+        setLanguage,
+        t
       }}
     >
       {children}

@@ -62,7 +62,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <h3 className="font-display font-bold text-xl text-gray-900">Message Delivered Successfully!</h3>
                   <p className="text-sm text-gray-600 max-w-sm mx-auto leading-relaxed">
-                    Thank you for reaching out to Ganesh J K Restaurant. Our Guest Support Manager has received your query and will reply via email or phone within 15 minutes.
+                    Thank you for reaching out to Ganesh JK Restaurant. Our Guest Support Manager has received your query and will reply via email or phone within 15 minutes.
                   </p>
                   <button
                     onClick={() => setSuccess(false)}
@@ -155,14 +155,14 @@ export const ContactSection: React.FC = () => {
                   <div className="space-y-2 flex-1">
                     <h4 className="font-bold text-gray-900 text-sm">Restaurant Address</h4>
                     <div className="leading-relaxed text-xs text-gray-500">
-                      <p className="font-bold text-gray-700">📍 Ganesh J K Restaurant</p>
+                      <p className="font-bold text-gray-700">📍 Ganesh JK Restaurant</p>
                       <p>Railway Station Road,</p>
                       <p>Near Railway Station,</p>
                       <p>Tadepalligudem, Andhra Pradesh</p>
                     </div>
                     <div className="pt-2">
                       <a
-                        href="https://maps.google.com/?q=Ganesh+J+K+Restaurant,+Railway+Station+Road,+Near+Railway+Station,+Tadepalligudem,+Andhra+Pradesh"
+                        href="https://maps.google.com/?q=Ganesh+JK+Restaurant,+Railway+Station+Road,+Near+Railway+Station,+Tadepalligudem,+Andhra+Pradesh"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-200 shadow-md hover-glow"
@@ -253,14 +253,14 @@ export const ContactSection: React.FC = () => {
           <div className="rounded-[2rem] overflow-hidden border border-gray-200 shadow-2xl h-[450px] w-full bg-[#f8f9fa] relative">
             {mapProvider === 'google' ? (
               <iframe
-                src="https://maps.google.com/maps?q=Ganesh%20J%20K%20Restaurant,%20Railway%20Station%20Road,%20Near%20Railway%20Station,%20Tadepalligudem,%20Andhra%20Pradesh&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Ganesh%20JK%20Restaurant,%20Railway%20Station%20Road,%20Near%20Railway%20Station,%20Tadepalligudem,%20Andhra%20Pradesh&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer"
-                title="Ganesh J K Restaurant Location Map"
+                title="Ganesh JK Restaurant Location Map"
                 className="w-full h-full"
               />
             ) : (
@@ -269,7 +269,7 @@ export const ContactSection: React.FC = () => {
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                title="Ganesh J K Restaurant OpenStreetMap Location"
+                title="Ganesh JK Restaurant OpenStreetMap Location"
                 className="w-full h-full"
               />
             )}
@@ -277,7 +277,7 @@ export const ContactSection: React.FC = () => {
             {/* Quick directions overlay link inside the map */}
             <div className="absolute bottom-6 right-6 z-10">
               <a
-                href="https://maps.google.com/?q=Ganesh+J+K+Restaurant,+Railway+Station+Road,+Near+Railway+Station,+Tadepalligudem,+Andhra+Pradesh"
+                href="https://maps.google.com/?q=Ganesh+JK+Restaurant,+Railway+Station+Road,+Near+Railway+Station,+Tadepalligudem,+Andhra+Pradesh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 px-5 py-3 rounded-full bg-primary hover:bg-primary-hover text-white text-xs font-extrabold uppercase tracking-widest shadow-xl transition-all duration-300 hover:scale-105 hover-glow"

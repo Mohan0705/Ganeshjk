@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext';
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PremiumImage } from './PremiumImage';
+import { DISH_TRANSLATIONS } from '../context/translations';
 
 export const CartDrawer: React.FC = () => {
   const { 
@@ -12,14 +13,15 @@ export const CartDrawer: React.FC = () => {
     cartOpen, 
     setCartOpen, 
     deliveryCharge,
-    setActivePage 
+    setActivePage,
+    t,
+    language
   } = useApp();
 
   const subtotal = cart.reduce((acc, item) => acc + item.menuItem.price * item.quantity, 0);
   const isFreeDelivery = subtotal >= 500;
   const currentDeliveryFee = cart.length === 0 ? 0 : (isFreeDelivery ? 0 : deliveryCharge);
-  const gstCharge = Math.round(subtotal * 0.05); // 5% GST
-  const grandTotal = subtotal + currentDeliveryFee + gstCharge;
+  const grandTotal = subtotal + currentDeliveryFee;
 
   const handleCheckoutClick = () => {
     setCartOpen(false);
@@ -54,9 +56,9 @@ export const CartDrawer: React.FC = () => {
                   <ShoppingBag className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="font-display font-bold text-base text-gray-800">Your Food Basket</h2>
+                  <h2 className="font-display font-bold text-base text-gray-800">{t('cart.title')}</h2>
                   <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">
-                    {cart.reduce((acc, item) => acc + item.quantity, 0)} Items Selected
+                    {t('cart.itemsSelected', { count: cart.reduce((acc, item) => acc + item.quantity, 0).toString() })}
                   </p>
                 </div>
               </div>
@@ -77,74 +79,78 @@ export const CartDrawer: React.FC = () => {
                   {/* Free delivery tracker banner */}
                   {!isFreeDelivery ? (
                     <div className="p-3.5 rounded-xl bg-orange-50 border border-orange-100/50 text-[11px] text-gray-650 text-center font-medium">
-                      Add <span className="text-primary font-bold">₹{500 - subtotal}</span> more to unlock <span className="text-emerald-600 font-bold">FREE delivery</span>!
+                      {t('cart.addMoreForFree', { amount: (500 - subtotal).toString() })}
                     </div>
                   ) : (
                     <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100/50 text-[11px] text-emerald-600 font-bold text-center">
-                      🎉 Congratulations! You have unlocked FREE delivery!
+                      {t('cart.freeDeliveryUnlocked')}
                     </div>
                   )}
 
                   {/* Items list mapper */}
-                  {cart.map((item) => (
-                    <div
-                      key={item.menuItem.id}
-                      className="p-3.5 rounded-xl bg-white border border-gray-150 flex items-center space-x-4 shadow-xs"
-                    >
-                      {/* Item image */}
-                      <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-50 shrink-0 border border-gray-100">
-                        <PremiumImage
-                          src={item.menuItem.image}
-                          alt={item.menuItem.name}
-                          className="w-full h-full object-cover"
-                          sizeHint="thumbnail"
-                        />
-                      </div>
-
-                      {/* Detail row */}
-                      <div className="flex-1 space-y-1">
-                        <div className="flex items-start justify-between">
-                          <h4 className="font-bold text-gray-800 text-xs sm:text-sm line-clamp-1 leading-tight">
-                            {item.menuItem.name}
-                          </h4>
-                          <button
-                            onClick={() => removeFromCart(item.menuItem.id)}
-                            className="p-1 text-gray-300 hover:text-red-500 transition-colors cursor-pointer"
-                            aria-label="Delete item"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
+                  {cart.map((item) => {
+                    const itemTranslation = DISH_TRANSLATIONS[language]?.[item.menuItem.name];
+                    const itemDisplayName = itemTranslation?.name || item.menuItem.name;
+                    return (
+                      <div
+                        key={item.menuItem.id}
+                        className="p-3.5 rounded-xl bg-white border border-gray-150 flex items-center space-x-4 shadow-xs"
+                      >
+                        {/* Item image */}
+                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-50 shrink-0 border border-gray-100">
+                          <PremiumImage
+                            src={item.menuItem.image}
+                            alt={itemDisplayName}
+                            className="w-full h-full object-cover"
+                            sizeHint="thumbnail"
+                          />
                         </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-primary font-bold">
-                            ₹{item.menuItem.price * item.quantity}
-                          </span>
 
-                          {/* Action quantity togglers */}
-                          <div className="flex items-center space-x-2 bg-orange-50 border border-orange-100/50 rounded-lg p-1">
+                        {/* Detail row */}
+                        <div className="flex-1 space-y-1">
+                          <div className="flex items-start justify-between">
+                            <h4 className="font-bold text-gray-800 text-xs sm:text-sm line-clamp-1 leading-tight">
+                              {itemDisplayName}
+                            </h4>
                             <button
-                              onClick={() => updateQuantity(item.menuItem.id, -1)}
-                              className="p-1 hover:bg-orange-100/50 text-primary rounded transition cursor-pointer"
-                              aria-label="Decrease quantity"
+                              onClick={() => removeFromCart(item.menuItem.id)}
+                              className="p-1 text-gray-300 hover:text-red-500 transition-colors cursor-pointer"
+                              aria-label="Delete item"
                             >
-                              <Minus className="w-3 h-3" />
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
-                            <span className="text-xs text-gray-800 font-bold px-1">
-                              {item.quantity}
+                          </div>
+                          
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-primary font-semibold">
+                              ₹{item.menuItem.price * item.quantity}
                             </span>
-                            <button
-                              onClick={() => updateQuantity(item.menuItem.id, 1)}
-                              className="p-1 hover:bg-orange-100/50 text-primary rounded transition cursor-pointer"
-                              aria-label="Increase quantity"
-                            >
-                              <Plus className="w-3 h-3" />
-                            </button>
+
+                            {/* Action quantity togglers */}
+                            <div className="flex items-center space-x-2 bg-orange-50 border border-orange-100/50 rounded-lg p-1">
+                              <button
+                                onClick={() => updateQuantity(item.menuItem.id, -1)}
+                                className="p-1 hover:bg-orange-100/50 text-primary rounded transition cursor-pointer"
+                                aria-label="Decrease quantity"
+                              >
+                                <Minus className="w-3 h-3" />
+                              </button>
+                              <span className="text-xs text-gray-800 font-bold px-1">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() => updateQuantity(item.menuItem.id, 1)}
+                                className="p-1 hover:bg-orange-100/50 text-primary rounded transition cursor-pointer"
+                                aria-label="Increase quantity"
+                              >
+                                <Plus className="w-3 h-3" />
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </>
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-center p-6 space-y-4">
@@ -152,9 +158,9 @@ export const CartDrawer: React.FC = () => {
                     <ShoppingBag className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-base text-gray-800">Your Cart is Empty</h3>
+                    <h3 className="font-display font-bold text-base text-gray-800">{t('cart.emptyTitle')}</h3>
                     <p className="text-xs text-gray-500 mt-1 max-w-xs leading-relaxed font-light">
-                      It seems you haven't selected any exquisite dishes yet. Explore our royal menu and add items to your basket.
+                      {t('cart.emptyDesc')}
                     </p>
                   </div>
                   <button
@@ -164,7 +170,7 @@ export const CartDrawer: React.FC = () => {
                     }}
                     className="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md shadow-primary/10 cursor-pointer"
                   >
-                    Browse Menu
+                    {t('cart.browseMenu')}
                   </button>
                 </div>
               )}
@@ -176,24 +182,20 @@ export const CartDrawer: React.FC = () => {
                 {/* Billing specs */}
                 <div className="space-y-2 text-xs text-gray-500">
                   <div className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span className="text-gray-800 font-bold">₹{subtotal}</span>
+                    <span>{t('cart.subtotal')}</span>
+                    <span className="text-gray-750 font-semibold">₹{subtotal}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Delivery Charge</span>
+                    <span>{t('cart.delivery')}</span>
                     {isFreeDelivery ? (
-                      <span className="text-emerald-600 font-bold uppercase text-[10px]">Free</span>
+                      <span className="text-emerald-600 font-semibold uppercase text-[10px]">{t('cart.free')}</span>
                     ) : (
-                      <span className="text-gray-800 font-bold">₹{deliveryCharge}</span>
+                      <span className="text-gray-750 font-semibold">₹{deliveryCharge}</span>
                     )}
                   </div>
-                  <div className="flex justify-between">
-                    <span>GST (5%)</span>
-                    <span className="text-gray-800 font-bold">₹{gstCharge}</span>
-                  </div>
-                  <div className="flex justify-between pt-2.5 border-t border-gray-250 text-sm">
-                    <span className="text-gray-800 font-bold">Grand Total</span>
-                    <span className="text-primary font-display font-bold text-base">₹{grandTotal}</span>
+                  <div className="flex justify-between pt-2.5 border-t border-gray-200 text-sm">
+                    <span className="text-gray-750 font-semibold">{t('cart.total')}</span>
+                    <span className="text-primary font-sans font-semibold text-base">₹{grandTotal}</span>
                   </div>
                 </div>
 
@@ -201,7 +203,7 @@ export const CartDrawer: React.FC = () => {
                   onClick={handleCheckoutClick}
                   className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm text-center flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-[1.01] shadow-lg shadow-primary/20 cursor-pointer"
                 >
-                  <span>Proceed to Checkout</span>
+                  <span>{t('cart.proceed')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               </div>
               <div>
                 <span className="font-display font-extrabold text-xl tracking-tight text-white block">
-                  Ganesh J K <span className="text-primary">Restaurant</span>
+                  Ganesh JK <span className="text-primary">Restaurant</span>
                 </span>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold">
                   Est. 2011 • Luxury Cuisine
@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
         {/* Divider & Copyright footer row */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="text-[11px] font-light text-center sm:text-left text-gray-500">
-            © 2026 Ganesh J K Restaurant. All rights reserved. Designed with precision, served with care.
+            © 2026 Ganesh JK Restaurant. All rights reserved. Designed with precision, served with care.
           </p>
 
           <div className="flex flex-wrap gap-6 text-[10px] font-bold uppercase tracking-widest justify-center items-center">

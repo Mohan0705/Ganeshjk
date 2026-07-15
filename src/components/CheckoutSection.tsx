@@ -28,8 +28,7 @@ export const CheckoutSection: React.FC = () => {
   const subtotal = cart.reduce((acc, item) => acc + item.menuItem.price * item.quantity, 0);
   const isFreeDelivery = subtotal >= 500;
   const currentDeliveryFee = cart.length === 0 ? 0 : (isFreeDelivery ? 0 : deliveryCharge);
-  const gstCharge = Math.round(subtotal * 0.05); // 5% GST
-  const grandTotal = subtotal + currentDeliveryFee + gstCharge;
+  const grandTotal = subtotal + currentDeliveryFee;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -99,7 +98,7 @@ export const CheckoutSection: React.FC = () => {
     const deliveryText = isFreeDelivery ? 'FREE' : `₹${currentDeliveryFee}`;
     const paymentText = formData.paymentMethod === 'cod' ? '💵 Cash on Delivery' : '📱 UPI / GPay';
 
-    const message = `🍽️ *GANESH J K RESTAURANT ORDER* 🍽️\n\n` +
+    const message = `🍽️ *GANESH JK RESTAURANT ORDER* 🍽️\n\n` +
       `*CUSTOMER DETAILS:*\n` +
       `👤 Name: ${formData.name}\n` +
       `📞 Phone: ${formData.phone}\n` +
@@ -108,7 +107,6 @@ export const CheckoutSection: React.FC = () => {
       `${orderItemsStr}\n` +
       `*BILLING BREAKDOWN:*\n` +
       `Subtotal: ₹${subtotal}\n` +
-      `GST (5%): ₹${gstCharge}\n` +
       `Delivery Charge: ${deliveryText}\n` +
       `-------------------------\n` +
       `💰 *Total Amount: ₹${grandTotal}*\n\n` +
@@ -417,8 +415,8 @@ export const CheckoutSection: React.FC = () => {
                       </div>
                       <div className="flex-1 space-y-0.5">
                         <div className="flex justify-between">
-                          <h4 className="font-bold text-gray-800 max-w-[170px] line-clamp-1 leading-tight">{item.menuItem.name}</h4>
-                          <span className="text-gray-800 font-bold">₹{item.menuItem.price * item.quantity}</span>
+                          <h4 className="font-bold text-gray-850 max-w-[170px] line-clamp-1 leading-tight">{item.menuItem.name}</h4>
+                          <span className="text-gray-700 font-semibold">₹{item.menuItem.price * item.quantity}</span>
                         </div>
                         <p className="text-[10px] font-medium">Qty: {item.quantity} x ₹{item.menuItem.price}</p>
                       </div>
@@ -433,23 +431,19 @@ export const CheckoutSection: React.FC = () => {
               <div className="space-y-2.5 text-xs text-gray-500 border-t border-gray-100 pt-4">
                 <div className="flex justify-between">
                   <span>Basket Subtotal</span>
-                  <span className="text-gray-800 font-bold">₹{subtotal}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>GST (5%)</span>
-                  <span className="text-gray-800 font-bold">₹{gstCharge}</span>
+                  <span className="text-gray-755 font-semibold">₹{subtotal}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Insulated Delivery Pack Fee</span>
                   {isFreeDelivery ? (
-                    <span className="text-emerald-600 font-bold uppercase text-[10px]">Free</span>
+                    <span className="text-emerald-600 font-semibold uppercase text-[10px]">Free</span>
                   ) : (
-                    <span className="text-gray-800 font-bold">₹{currentDeliveryFee}</span>
+                    <span className="text-gray-755 font-semibold">₹{currentDeliveryFee}</span>
                   )}
                 </div>
                 <div className="flex justify-between border-t border-gray-200 pt-3 text-sm">
-                  <span className="text-gray-800 font-bold">Total Payable</span>
-                  <span className="text-primary font-display font-bold text-base">₹{grandTotal}</span>
+                  <span className="text-gray-755 font-semibold">Total Payable</span>
+                  <span className="text-primary font-sans font-semibold text-base">₹{grandTotal}</span>
                 </div>
               </div>
 
@@ -457,7 +451,7 @@ export const CheckoutSection: React.FC = () => {
               <div className="p-4 rounded-xl bg-orange-50/50 border border-orange-100/30 text-[10px] text-gray-650 space-y-2.5 font-light leading-relaxed">
                 <p className="flex items-center space-x-2 font-bold text-gray-800 uppercase text-[9px] tracking-wider mb-1">
                   <ShieldCheck className="w-4 h-4 text-primary" />
-                  <span>Ganesh J K Restaurant Guarantees</span>
+                  <span>Ganesh JK Restaurant Guarantees</span>
                 </p>
                 <p>• Completely contactless hygiene preparation.</p>
                 <p>• 100% replacement or refund if hygiene seal is compromised.</p>

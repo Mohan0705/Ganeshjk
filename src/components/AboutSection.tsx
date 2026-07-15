@@ -15,11 +15,11 @@ export const AboutSection: React.FC = () => {
             Our Story
           </span>
           <h1 className="font-display font-bold text-3xl sm:text-5xl text-gray-800 tracking-tight mt-2">
-            The Story of Ganesh J K Restaurant
+            The Story of Ganesh JK Restaurant
           </h1>
           <div className="w-16 h-1 bg-gradient-to-r from-primary to-[#FF8C39] mx-auto mt-4 rounded-full" />
           <p className="text-gray-500 font-light text-sm mt-4">
-            Established in 2011, Ganesh J K Restaurant represents the perfect intersection of ancient clay-oven cooking, secret family spice blends, and luxury hospitality.
+            Established in 2011, Ganesh JK Restaurant represents the perfect intersection of ancient clay-oven cooking, secret family spice blends, and luxury hospitality.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export const AboutSection: React.FC = () => {
               A Legacy of Exquisite Flavors & Handpicked Herbs
             </h2>
             <p className="text-gray-500 leading-relaxed font-light text-sm">
-              At Ganesh J K Restaurant, we believe that the best meals are crafted with deep respect for the legacy of Indian cuisine. For over a decade, we have been serving Tadepalligudem with delicious, high-quality dishes.
+              At Ganesh JK Restaurant, we believe that the best meals are crafted with deep respect for the legacy of Indian cuisine. For over a decade, we have been serving Tadepalligudem with delicious, high-quality dishes.
             </p>
             <p className="text-gray-500 leading-relaxed font-light text-sm">
               We source our spices directly from the hills of Kerala and grind them in-house weekly. Our meats are fresh-cut and processed under strict halal-hygiene guidelines, and we never compromise on our oil choices. Our kitchen does not utilize any chemical food colors, nor MSG, keeping our meals highly safe for child and elderly dining alike.
@@ -62,7 +62,7 @@ export const AboutSection: React.FC = () => {
             <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden border border-gray-200/85 p-2.5 bg-white shadow-xl">
               <PremiumImage
                 src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=800&auto=format&fit=crop"
-                alt="Chefs prepared food at Ganesh J K Restaurant"
+                alt="Chefs prepared food at Ganesh JK Restaurant"
                 className="w-full h-full object-cover rounded-2xl brightness-95"
                 sizeHint="large"
               />
@@ -77,19 +77,19 @@ export const AboutSection: React.FC = () => {
         {/* Interactive Stats Panel */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl bg-white border border-gray-200/80 text-center shadow-md mb-12">
           <div>
-            <span className="font-display font-bold text-3xl sm:text-4xl text-primary block">2011</span>
+            <span className="font-sans font-bold text-3xl sm:text-4xl text-primary block">2011</span>
             <span className="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-widest mt-1 block">Year Founded</span>
           </div>
           <div>
-            <span className="font-display font-bold text-3xl sm:text-4xl text-primary block">15+</span>
+            <span className="font-sans font-bold text-3xl sm:text-4xl text-primary block">15+</span>
             <span className="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-widest mt-1 block">Master Chefs</span>
           </div>
           <div>
-            <span className="font-display font-bold text-3xl sm:text-4xl text-primary block">40+</span>
+            <span className="font-sans font-bold text-3xl sm:text-4xl text-primary block">40+</span>
             <span className="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-widest mt-1 block">Signature Dishes</span>
           </div>
           <div>
-            <span className="font-display font-bold text-3xl sm:text-4xl text-primary block">4.9</span>
+            <span className="font-sans font-bold text-3xl sm:text-4xl text-primary block">4.9</span>
             <span className="text-[10px] sm:text-xs text-gray-500 uppercase font-bold tracking-widest mt-1 block">Customer Rating</span>
           </div>
         </div>

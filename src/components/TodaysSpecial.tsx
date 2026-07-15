@@ -97,7 +97,7 @@ export const TodaysSpecial: React.FC = () => {
 
               {/* Review Testimonial Quote */}
               <div className="p-5 rounded-2xl bg-white/5 border-l-4 border-primary text-xs sm:text-sm text-gray-300 font-medium italic backdrop-blur-sm shadow-inner">
-                &ldquo;The mutton was incredibly soft, literally falling off the bone, and the aroma filled our entire home immediately. Simply phenomenal! Ganesh J K has perfected the authentic Dum biryani!&rdquo; — Dr. Anand K.
+                &ldquo;The mutton was incredibly soft, literally falling off the bone, and the aroma filled our entire home immediately. Simply phenomenal! Ganesh JK has perfected the authentic Dum biryani!&rdquo; — Dr. Anand K.
               </div>
 
               {/* Price & Cart Add Panel */}
@@ -105,7 +105,7 @@ export const TodaysSpecial: React.FC = () => {
                 <div className="space-y-1.5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Deal Price</span>
                   <div className="flex items-baseline space-x-3.5">
-                    <span className="font-display font-extrabold text-3xl sm:text-4xl text-white">₹{specialDish.price}</span>
+                    <span className="font-sans font-semibold text-2xl sm:text-3xl text-white/95">₹{specialDish.price}</span>
                     <span className="text-base text-gray-500 line-through font-medium">₹{originalPrice}</span>
                     <span className="text-xs text-[#2E8B57] font-extrabold bg-[#2E8B57]/10 border border-[#2E8B57]/20 px-3 py-1 rounded-full">
                       Save {Math.round((1 - specialDish.price / originalPrice) * 100)}%

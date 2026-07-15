@@ -35,6 +35,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Ensure lining numbers for display font so that numbers like 65 or 555 are styled exactly like normal text */
+.font-display, [class*="font-display"] {
+  font-variant-numeric: lining-nums !important;
+  font-feature-settings: "lnum" 1 !important;
+}
+
 /* Beautiful textured backgrounds */
 .bg-grain-texture {
   background-image: radial-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 0);

@@ -40,7 +40,7 @@ export const WhyChooseUs: React.FC = () => {
             ✨ Uncompromising Excellence
           </span>
           <h2 className="font-display font-bold text-4xl sm:text-5xl text-gray-900 tracking-tight mt-4">
-            The Ganesh J K Benchmark
+            The Ganesh JK Benchmark
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary via-secondary to-gold mx-auto mt-4 rounded-full" />
           <p className="text-gray-600 font-light text-sm mt-4 leading-relaxed">

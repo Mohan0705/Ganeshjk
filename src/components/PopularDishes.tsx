@@ -179,8 +179,8 @@ export const PopularDishes: React.FC = () => {
                     {/* Footer Row with Prices and Premium Buttons */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div>
-                        <span className="text-[10px] text-gray-400 block leading-none mb-1 uppercase font-extrabold tracking-wider">Price</span>
-                        <span className="font-display font-extrabold text-2xl text-gray-900">₹{dish.price}</span>
+                        <span className="text-[10px] text-gray-400 block leading-none mb-1 uppercase font-bold tracking-wider">Price</span>
+                        <span className="font-sans font-semibold text-lg text-gray-700">₹{dish.price}</span>
                       </div>
 
                       {cartItem ? (

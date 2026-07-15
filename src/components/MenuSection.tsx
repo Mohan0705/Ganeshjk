@@ -4,6 +4,7 @@ import { MENU_ITEMS } from '../data';
 import { Star, Search, Plus, Minus, SlidersHorizontal, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PremiumImage } from './PremiumImage';
+import { DISH_TRANSLATIONS } from '../context/translations';
 
 export const MenuSection: React.FC = () => {
   const { 
@@ -13,7 +14,9 @@ export const MenuSection: React.FC = () => {
     searchQuery, 
     setSearchQuery, 
     selectedMenuCategory, 
-    setSelectedMenuCategory 
+    setSelectedMenuCategory,
+    t,
+    language
   } = useApp();
 
   const [vegFilter, setVegFilter] = useState<'all' | 'veg' | 'nonveg'>('all');
@@ -30,14 +33,14 @@ export const MenuSection: React.FC = () => {
   }, [selectedMenuCategory, vegFilter, searchQuery]);
 
   const categories = [
-    { name: 'All', icon: '🍽️' },
-    { name: 'Biryani', icon: '🍛' },
-    { name: 'Fried Rice', icon: '🍚' },
-    { name: 'Starters', icon: '🍗' },
-    { name: 'Main Course', icon: '🍲' },
-    { name: 'Seafood', icon: '🦐' },
-    { name: 'Soups', icon: '🍜' },
-    { name: 'Indian Bread', icon: '🫓' }
+    { name: 'All', label: t('cat.all'), icon: '🍽️' },
+    { name: 'Biryani', label: t('cat.biryani'), icon: '🍛' },
+    { name: 'Fried Rice', label: t('cat.friedRice'), icon: '🍚' },
+    { name: 'Starters', label: t('cat.starters'), icon: '🍗' },
+    { name: 'Main Course', label: t('cat.mainCourse'), icon: '🍲' },
+    { name: 'Seafood', label: t('cat.seafood'), icon: '🦐' },
+    { name: 'Soups', label: t('cat.soups'), icon: '🍜' },
+    { name: 'Indian Bread', label: t('cat.indianBread'), icon: '🫓' }
   ];
 
   // Filtering Logic
@@ -85,14 +88,14 @@ export const MenuSection: React.FC = () => {
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-primary text-xs font-bold tracking-widest uppercase">
-            Our Menu
+            {t('menu.title')}
           </span>
           <h1 className="font-display font-bold text-3xl sm:text-5xl text-gray-800 tracking-tight mt-2">
-            Explore Our Delicious Dishes
+            {t('menu.subtitle')}
           </h1>
           <div className="w-16 h-1 bg-gradient-to-r from-primary to-[#FF8C39] mx-auto mt-4 rounded-full" />
           <p className="text-gray-500 font-light text-sm mt-4">
-            Enjoy our freshly prepared biryanis, tasty fried rices, delicious seafood, and freshly baked tandoori breads made with fresh ingredients and served with care.
+            {t('menu.desc')}
           </p>
         </div>
 
@@ -104,7 +107,7 @@ export const MenuSection: React.FC = () => {
               <Search className="w-4 h-4 text-gray-400 shrink-0 ml-1" />
               <input
                 type="text"
-                placeholder="Search dishes..."
+                placeholder={t('menu.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-transparent border-0 outline-none text-gray-700 text-sm px-3 py-1.5 placeholder-gray-400 font-medium"
@@ -114,7 +117,7 @@ export const MenuSection: React.FC = () => {
                   onClick={() => setSearchQuery('')}
                   className="text-xs text-gray-400 hover:text-primary px-1.5 font-bold cursor-pointer"
                 >
-                  Clear
+                  {t('menu.clear')}
                 </button>
               )}
             </div>
@@ -122,9 +125,9 @@ export const MenuSection: React.FC = () => {
             {/* Veg / Non-Veg Toggle Bar */}
             <div className="flex items-center space-x-1 p-1 bg-[#FAFAFA] rounded-xl border border-gray-150 w-full md:w-auto">
               {[
-                { label: 'All Dishes', id: 'all' },
-                { label: '🟢 Veg Only', id: 'veg' },
-                { label: '🔴 Non-Veg Only', id: 'nonveg' }
+                { label: t('menu.allDishes'), id: 'all' },
+                { label: `🟢 ${t('menu.veg')}`, id: 'veg' },
+                { label: `🔴 ${t('menu.nonveg')}`, id: 'nonveg' }
               ].map((filter) => (
                 <button
                   key={filter.id}
@@ -145,7 +148,7 @@ export const MenuSection: React.FC = () => {
           <div className="pt-3 border-t border-gray-100">
             <div className="flex items-center space-x-2 text-gray-500 text-xs mb-3 font-semibold">
               <SlidersHorizontal className="w-3.5 h-3.5 text-primary" />
-              <span>Browse Categories:</span>
+              <span>{t('menu.browse')}</span>
             </div>
             
             <div className="flex space-x-2.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth">
@@ -162,7 +165,7 @@ export const MenuSection: React.FC = () => {
                     }`}
                   >
                     <span>{cat.icon}</span>
-                    <span>{cat.name}</span>
+                    <span>{cat.label}</span>
                   </button>
                 );
               })}
@@ -222,6 +225,14 @@ export const MenuSection: React.FC = () => {
             >
               {displayedItems.map((dish, idx) => {
                 const cartItem = getCartItem(dish.id);
+                const translation = DISH_TRANSLATIONS[language]?.[dish.name];
+                const displayName = translation?.name || dish.name;
+                const displayDesc = translation?.desc || dish.description;
+                
+                // Get clean category key
+                const catKey = 'cat.' + dish.category.toLowerCase().replace(' ', '');
+                const displayCategory = t(catKey) !== catKey ? t(catKey) : dish.category;
+
                 return (
                   <motion.div
                     layout
@@ -236,7 +247,7 @@ export const MenuSection: React.FC = () => {
                     <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50">
                       <PremiumImage
                         src={dish.image}
-                        alt={dish.name}
+                        alt={displayName}
                         className="w-full h-full object-cover group-hover:scale-108 transition-all duration-500 brightness-95 group-hover:brightness-100"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
@@ -252,12 +263,12 @@ export const MenuSection: React.FC = () => {
                         {dish.isVeg ? (
                           <span className="py-1 px-2.5 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center space-x-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">Veg</span>
+                            <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">{t('cart.veg')}</span>
                           </span>
                         ) : (
                           <span className="py-1 px-2.5 rounded-lg bg-red-50 border border-red-100 flex items-center space-x-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                            <span className="text-[9px] font-bold text-red-700 uppercase tracking-wider">Non-Veg</span>
+                            <span className="text-[9px] font-bold text-red-700 uppercase tracking-wider">{t('cart.nonveg')}</span>
                           </span>
                         )}
                       </div>
@@ -268,22 +279,22 @@ export const MenuSection: React.FC = () => {
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] text-primary uppercase font-bold tracking-wider">
-                            {dish.category}
+                            {displayCategory}
                           </span>
                         </div>
                         <h3 className="font-display font-bold text-base text-gray-850 tracking-tight group-hover:text-primary transition-colors duration-300">
-                          {dish.name}
+                          {displayName}
                         </h3>
                         <p className="text-xs text-gray-500 font-light line-clamp-3 leading-relaxed">
-                          {dish.description}
+                          {displayDesc}
                         </p>
                       </div>
 
                       {/* Action Row */}
                       <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                         <div className="space-y-0.5">
-                          <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Price</span>
-                          <p className="font-display font-bold text-lg text-gray-850">₹{dish.price}</p>
+                          <span className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold">{t('cart.price')}</span>
+                          <p className="font-sans font-semibold text-base text-gray-700">₹{dish.price}</p>
                         </div>
 
                         {cartItem ? (
@@ -313,7 +324,7 @@ export const MenuSection: React.FC = () => {
                             aria-label="Add food to cart"
                           >
                             <Plus className="w-3.5 h-3.5" />
-                            <span>Add To Cart</span>
+                            <span>{t('cart.addToCart')}</span>
                           </button>
                         )}
                       </div>
@@ -324,7 +335,7 @@ export const MenuSection: React.FC = () => {
             </motion.div>
           ) : (
             <div className="text-center py-20 rounded-2xl border border-dashed border-gray-250 bg-white shadow-xs">
-              <p className="text-lg text-gray-500">No dishes found matching your filter criteria.</p>
+              <p className="text-lg text-gray-500">{t('menu.noDishes')}</p>
               <button 
                 onClick={() => {
                   setSearchQuery('');
@@ -333,7 +344,7 @@ export const MenuSection: React.FC = () => {
                 }}
                 className="mt-4 text-xs font-bold text-primary hover:underline uppercase tracking-widest cursor-pointer"
               >
-                Reset All Filters
+                {t('menu.reset')}
               </button>
             </div>
           )}
@@ -347,7 +358,7 @@ export const MenuSection: React.FC = () => {
               className="px-8 py-3.5 rounded-xl border border-primary/20 hover:border-primary/45 hover:bg-orange-50/50 text-primary transition-all duration-300 font-bold text-sm inline-flex items-center space-x-2 cursor-pointer"
             >
               <Eye className="w-4 h-4" />
-              <span>View More Dishes</span>
+              <span>{t('menu.viewMore')}</span>
             </button>
           </div>
         )}
